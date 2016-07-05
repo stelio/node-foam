@@ -1,4 +1,4 @@
-var hyperquest = require('hyperquest')
+var request = require('request')
   , XML = require('simple-xml')
   , StringStream = require('stream-ext').StringStream
   , zlib = require('zlib')
@@ -25,7 +25,8 @@ module.exports = function soap (uri, operation, action, message, options, callba
     }
   });
 
-  var req = hyperquest.post(uri, {
+  var req = request.post({
+    url: uri,
     headers: headers(action, xml.length),
     rejectUnauthorized: options.rejectUnauthorized,
     secureProtocol: options.secureProtocol
